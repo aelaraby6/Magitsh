@@ -1,0 +1,31 @@
+{
+  "name": "mygit",
+  "version": "1.0.0",
+  "description": "A simple Git-like version control system built with Node.js",
+  "main": "src/index.js",
+  "bin": {
+    "mygit": "./bin/mygit.js"
+  },
+  "scripts": {
+    "start": "node bin/mygit.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [
+    "git",
+    "vcs",
+    "version-control"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^11.1.0",
+    "chalk": "^4.1.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
