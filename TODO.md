@@ -1,31 +1,36 @@
 ## TODO
 
-## Week 1: Repository Initialization
-- [ ] Create project structure
-- [ ] Set up package.json
-- [ ] Implement init command
-- [ ] Create .mygit directory structure
-- [ ] Test init command
+## Repository Initialization
 
-## Week 2: File Tracking
+- [x] Create project structure
+- [x] Set up package.json
+- [x] Implement init command
+- [x] Create .mygit directory structure
+- [x] Test init command
+
+## File Tracking
+
 - [ ] Implement add command
 - [ ] Create staging area
 - [ ] Implement file hashing
 - [ ] Implement status command
 - [ ] Test add and status
 
-## Week 3: Commits
+## Commits
+
 - [ ] Implement commit command
 - [ ] Create commit objects
 - [ ] Implement log command
 - [ ] Test commits
 
-## Week 4: Branching
+## Branching
+
 - [ ] Implement branch command
 - [ ] Implement checkout command
 - [ ] Test branching
 
-## Week 5-6: Merging
+## Merging
+
 - [ ] Implement merge command
 - [ ] Handle merge conflicts
 - [ ] Final testing

@@ -1,0 +1,6 @@
+#!/bin/sh
+# Commit-msg hook example
+# Remove .sample extension to activate
+
+# Check commit message format
+exit 0
