@@ -19,8 +19,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "commander": "^11.1.0",
-    "chalk": "^4.1.2"
+    "chalk": "^4.1.2",
+    "commander": "^11.1.0"
   },
   "devDependencies": {
     "jest": "^29.7.0"
