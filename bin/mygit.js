@@ -3,6 +3,8 @@
 const { program } = require("commander");
 const chalk = require("chalk");
 const { init } = require("../src/commands/init");
+const { add } = require("../src/commands/add");
+
 
 program
   .name("mygit")
@@ -28,8 +30,7 @@ program
   .description("Add file(s) to staging area")
   .action((files) => {
     try {
-      console.log(chalk.blue(`Adding ${files.join(", ")}...`));
-      // TODO: add.execute(files);
+      add(files);
     } catch (error) {
       console.error(chalk.red("Error:", error.message));
       process.exit(1);
