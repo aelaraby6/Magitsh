@@ -4,6 +4,7 @@ const { program } = require("commander");
 const chalk = require("chalk");
 const { init } = require("../src/commands/init");
 const { add } = require("../src/commands/add");
+const { commit } = require("../src/commands/add");
 
 
 program

@@ -18,7 +18,7 @@
 
 ## Commits
 
-- [x] Implement commit command
+- [ ] Implement commit command
 - [ ] Create commit objects
 - [ ] Implement log command
 - [ ] Test commits
