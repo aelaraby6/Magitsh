@@ -13,8 +13,8 @@
 - [x] Implement add command
 - [x] Create staging area
 - [x] Implement file hashing
-- [ ] Implement status command
-- [ ] Test add and status
+- [x] Implement status command
+- [x] Test add and status
 
 ## Commits
 
@@ -34,3 +34,5 @@
 - [ ] Implement merge command
 - [ ] Handle merge conflicts
 - [ ] Final testing
+
+![alt text](image.png)

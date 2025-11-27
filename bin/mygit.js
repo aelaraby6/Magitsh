@@ -4,6 +4,7 @@ const { program } = require("commander");
 const chalk = require("chalk");
 const { init } = require("../src/commands/init");
 const { add } = require("../src/commands/add");
+const { status } = require("../src/commands/status");
 const { commit } = require("../src/commands/add");
 
 
@@ -27,7 +28,7 @@ program
 
 // Add command
 program
-  .command("add <files...>")  
+  .command("add <files...>")
   .description("Add file(s) to staging area")
   .action((files) => {
     try {
@@ -42,10 +43,9 @@ program
 program
   .command("status")
   .description("Show the working tree status")
-  .action(() => {
+  .action(async () => {
     try {
-      console.log(chalk.yellow("On branch main"));
-      // TODO: status.execute();
+      await status();
     } catch (error) {
       console.error(chalk.red("Error:", error.message));
       process.exit(1);
@@ -56,7 +56,7 @@ program
 program
   .command("commit")
   .description("Record changes to the repository")
-  .option("-m, --message <msg>", "Commit message")  
+  .option("-m, --message <msg>", "Commit message")
   .action((options) => {
     try {
       if (!options.message) {
