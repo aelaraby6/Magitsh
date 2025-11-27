@@ -8,9 +8,7 @@ async function createTreeObject(index, repoPath) {
 
   const rootTreeHash = await buildTreeObjects(organizedFiles, repoPath);
 
-  console.log(rootTreeHash);
-  
-
+  return rootTreeHash;
 }
 
 function organizeFilesByDirectory(index) {
@@ -71,43 +69,40 @@ async function buildTreeObjects(organized, repoPath) {
   }
 
   console.log(treeHashes);
-  
-  
+
   return treeHashes["root"];
 }
 
 async function saveTreeObject(entries, repoPath) {
   let contentBuffers = [];
-  
+
   for (const entry of entries) {
     // [mode] [space] [name] [null byte]
     const header = Buffer.from(`${entry.mode} ${entry.name}\0`);
-    
+
     // [20-byte binary hash]
-    const hashBinary = Buffer.from(entry.hash, 'hex');
-    
+    const hashBinary = Buffer.from(entry.hash, "hex");
+
     contentBuffers.push(header);
     contentBuffers.push(hashBinary);
   }
-  
+
   const content = Buffer.concat(contentBuffers);
-  
+
   const header = Buffer.from(`tree ${content.length}\0`);
   const fullContent = Buffer.concat([header, content]);
-  
+
   const hash = sha1(fullContent);
-  
-  const dir = path.join(repoPath, 'objects', hash.substring(0, 2));
+
+  const dir = path.join(repoPath, "objects", hash.substring(0, 2));
   const file = path.join(dir, hash.substring(2));
-  
+
   await fs.mkdir(dir, { recursive: true });
-  
+
   const compressed = zlib.deflateSync(fullContent);
   await fs.writeFile(file, compressed);
-    
+
   return hash;
 }
-
-
 
 module.exports = { createTreeObject };

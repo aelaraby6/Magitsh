@@ -8,7 +8,7 @@ const {
   createDirectoryStructure,
   createHooksSamples,
   createInfoExclude,
-} = require("../utils/initHelpers");
+} = require("../utils/init.helpers");
 
 async function init() {
   try {

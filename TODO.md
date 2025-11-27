@@ -2,7 +2,7 @@
 
 ## Repository Initialization
 
--   [x] Create project structure
+- [x] Create project structure
 - [x] Set up package.json
 - [x] Implement init command
 - [x] Create .mygit directory structure
