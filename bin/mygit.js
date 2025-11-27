@@ -4,8 +4,8 @@ const { program } = require("commander");
 const chalk = require("chalk");
 const { init } = require("../src/commands/init");
 const { add } = require("../src/commands/add");
-const { commit } = require("../src/commands/add");
-
+const { commit } = require("../src/commands/commit");
+const { log } = require("../src/commands/log");
 
 program
   .name("mygit")
@@ -27,7 +27,7 @@ program
 
 // Add command
 program
-  .command("add <files...>")  
+  .command("add <files...>")
   .description("Add file(s) to staging area")
   .action((files) => {
     try {
@@ -56,16 +56,17 @@ program
 program
   .command("commit")
   .description("Record changes to the repository")
-  .option("-m, --message <msg>", "Commit message")  
-  .action((options) => {
+  .option("-m, --message <msg>", "Commit message")
+  .action(async (options) => {
     try {
       if (!options.message) {
-        console.log(chalk.red("Error: Please provide a commit message using -m flag"));
+        console.log(
+          chalk.red("Error: Please provide a commit message using -m flag")
+        );
         console.log(chalk.gray("Example: mygit commit -m 'Your message'"));
         process.exit(1);
       }
-      console.log(chalk.green(`Committing: ${options.message}`));
-      // TODO: commit.execute(options.message);
+      await commit(options.message);
     } catch (error) {
       console.error(chalk.red("Error:", error.message));
       process.exit(1);
@@ -76,10 +77,10 @@ program
 program
   .command("log")
   .description("Show commit logs")
-  .action(() => {
+  .action(async () => {
     try {
       console.log(chalk.cyan("Commit history:"));
-      // TODO: log.execute();
+      await log();
     } catch (error) {
       console.error(chalk.red("Error:", error.message));
       process.exit(1);

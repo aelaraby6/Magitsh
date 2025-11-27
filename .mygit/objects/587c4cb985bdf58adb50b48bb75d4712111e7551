@@ -2,7 +2,7 @@
 
 ## Repository Initialization
 
--   [x] Create project structure
+- [x] Create project structure
 - [x] Set up package.json
 - [x] Implement init command
 - [x] Create .mygit directory structure
@@ -18,7 +18,7 @@
 
 ## Commits
 
-- [ ] Implement commit command
+- [x] Implement commit command
 - [ ] Create commit objects
 - [ ] Implement log command
 - [ ] Test commits

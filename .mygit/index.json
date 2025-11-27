@@ -1,17 +1,7 @@
 {
   "TODO.md": {
-    "hash": "6fab64f719aa3fd78a133e2fb0efe1125d7e82f8",
-    "size": 697,
-    "mtime": 1764097604581.4143
-  },
-  "src/index.js": {
-    "hash": "00fb00749281f4aea8ac983afe0f9bce295b1f51",
-    "size": 58,
-    "mtime": 1763985276715.9443
-  },
-  "package.json": {
-    "hash": "5a889b288bc4018c78d620372b9ef8813bcfcf26",
-    "size": 605,
-    "mtime": 1764097659100.239
+    "hash": "587c4cb985bdf58adb50b48bb75d4712111e7551",
+    "size": 695,
+    "mtime": 1764267492622.7378
   }
 }
