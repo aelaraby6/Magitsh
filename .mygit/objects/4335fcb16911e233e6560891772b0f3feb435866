@@ -52,7 +52,7 @@ describe("Add Command", () => {
 
   test("should add multiple files to staging area", async () => {
     const files = ["file1.txt", "file2.txt", "file3.txt"];
-
+    
     for (const file of files) {
       await fs.writeFile(file, `Content of ${file}`);
     }
@@ -98,7 +98,7 @@ describe("Add Command", () => {
 
   test("should update index when file is modified and re-added", async () => {
     const testFile = "modify-test.txt";
-
+    
     // Add file first time
     await fs.writeFile(testFile, "Original content");
     await add([testFile]);
@@ -137,7 +137,7 @@ describe("Add Command", () => {
   test("should add some files even if others fail", async () => {
     const goodFile = "good.txt";
     const badFile = "does-not-exist.txt";
-
+    
     await fs.writeFile(goodFile, "Good content");
 
     await add([goodFile, badFile]);
