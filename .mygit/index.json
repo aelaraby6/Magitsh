@@ -1,8 +1,8 @@
 {
   "TODO.md": {
-    "hash": "6fab64f719aa3fd78a133e2fb0efe1125d7e82f8",
-    "size": 697,
-    "mtime": 1764097604581.4143
+    "hash": "4965a20cde5dc381cd4ea5186d2375de2b4f8d88",
+    "size": 684,
+    "mtime": 1764246268499.6504
   },
   "src/index.js": {
     "hash": "00fb00749281f4aea8ac983afe0f9bce295b1f51",
@@ -10,8 +10,93 @@
     "mtime": 1763985276715.9443
   },
   "package.json": {
-    "hash": "5a889b288bc4018c78d620372b9ef8813bcfcf26",
-    "size": 605,
-    "mtime": 1764097659100.239
+    "hash": "01a1ec194540532d6de497078ff25d94d8e18d1c",
+    "size": 594,
+    "mtime": 1764245303366.3464
+  },
+  ".gitignore": {
+    "hash": "37044c329c51bd1c99e5c875373e2dc284002061",
+    "size": 552,
+    "mtime": 1763985276712.348
+  },
+  "bin/mygit.js": {
+    "hash": "0b34894b1aa132c3a1e5e97dcbcb087044ccf360",
+    "size": 2250,
+    "mtime": 1764246268541.6313
+  },
+  "image.png": {
+    "hash": "548c09db3c55baa079c0d62889b667449e6140cf",
+    "size": 112424,
+    "mtime": 1764246088778.2764
+  },
+  "package-lock.json": {
+    "hash": "6f6c4cdbdec1fb17ffd407d6d230047f6ebb29e3",
+    "size": 131882,
+    "mtime": 1763992593421.469
+  },
+  "src/commands/add.js": {
+    "hash": "2164dc7a6f463105fd681efa29c1af2585ed729f",
+    "size": 1907,
+    "mtime": 1764247642007.542
+  },
+  "src/commands/commit.js": {
+    "hash": "c2b0aef1c33f22b202305b6a15bbb535c6e2de8e",
+    "size": 941,
+    "mtime": 1764245303366.3464
+  },
+  "src/commands/init.js": {
+    "hash": "d99fa39cff9e3dd46d14c9b32159360d656078e2",
+    "size": 1030,
+    "mtime": 1763991032508.116
+  },
+  "src/commands/status.js": {
+    "hash": "4af3aa62cab5591a35339c612cee3e8e295c8933",
+    "size": 3885,
+    "mtime": 1764246436654.4275
+  },
+  "src/core/repository.js": {
+    "hash": "358401f891aac0501786278cf2beea57b4600b97",
+    "size": 355,
+    "mtime": 1763989661482.5532
+  },
+  "src/utils/files.js": {
+    "hash": "f4b86338dfc1318379eb5fe4a922aa2e5e0bbfc1",
+    "size": 906,
+    "mtime": 1764245282219.161
+  },
+  "src/utils/getWorkFiles.js": {
+    "hash": "fc3f793b4207b1a9dcdd9ffc115824d3b8188ee2",
+    "size": 714,
+    "mtime": 1764247472700.0256
+  },
+  "src/utils/hash.js": {
+    "hash": "c59e163c98b65b56450f1baef930ff4ddba747bc",
+    "size": 509,
+    "mtime": 1764245282220.1611
+  },
+  "src/utils/initHelpers.js": {
+    "hash": "ce6d87f330603fa5609607d28994b35d75693c2c",
+    "size": 2590,
+    "mtime": 1763985276716.9192
+  },
+  "src/utils/tree.js": {
+    "hash": "55be7b09183052083b7735bf9dedbeda92817cfd",
+    "size": 2761,
+    "mtime": 1764245303366.3464
+  },
+  "tests/add.test.js": {
+    "hash": "4335fcb16911e233e6560891772b0f3feb435866",
+    "size": 12516,
+    "mtime": 1764247402885.596
+  },
+  "tests/init.test.js": {
+    "hash": "9a5ca62a8b53d3160ec660bbefec4b4641500fcb",
+    "size": 3481,
+    "mtime": 1763985276716.9192
+  },
+  "tests/status.test.js": {
+    "hash": "2a8225e5727f996d7a2838753fd95cfdb0687d3a",
+    "size": 10152,
+    "mtime": 1764246267189.8008
   }
 }
