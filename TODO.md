@@ -19,15 +19,15 @@
 ## Commits
 
 - [x] Implement commit command
-- [ ] Create commit objects
-- [ ] Implement log command
-- [ ] Test commits
+- [x] Create commit objects
+- [x] Implement log command
+- [x] Test commits
 
 ## Branching
 
-- [ ] Implement branch command
-- [ ] Implement checkout command
-- [ ] Test branching
+- [x] Implement branch command
+- [x] Implement checkout command
+- [x] Test branching
 
 ## Merging
 

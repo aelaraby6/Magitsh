@@ -5,8 +5,10 @@ const chalk = require("chalk");
 const { init } = require("../src/commands/init");
 const { add } = require("../src/commands/add");
 const { status } = require("../src/commands/status");
-const { commit } = require("../src/commands/add");
+const { commit } = require("../src/commands/commit");
 const { log } = require("../src/commands/log");
+const { branch } = require("../src/commands/branch");
+const { checkout } = require("../src/commands/chekout");
 
 program
   .name("mygit")
@@ -81,6 +83,36 @@ program
     try {
       console.log(chalk.cyan("Commit history:"));
       await log();
+    } catch (error) {
+      console.error(chalk.red("Error:", error.message));
+      process.exit(1);
+    }
+  });
+
+// Branch command
+program
+  .command("branch")
+  .description("List all branches")
+  .action(async () => {
+    try {
+      await branch();
+    } catch (error) {
+      console.error(chalk.red("Error:", error.message));
+      process.exit(1);
+    }
+  });
+
+// Checkout command
+program
+  .command("checkout <branch>")
+  .description("Switch branches or create and switch to a new branch")
+  .option("-b", "Create a new branch")
+  .action(async (branchName, options) => {
+    try {
+      await checkout({
+        branchName,
+        createNew: options.b || false,
+      });
     } catch (error) {
       console.error(chalk.red("Error:", error.message));
       process.exit(1);
