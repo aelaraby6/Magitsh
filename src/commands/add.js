@@ -33,6 +33,9 @@ async function add(files) {
       const filePath = path.join(process.cwd(), file);
 
       try {
+        // Check if file exists
+        await fs.access(filePath);
+
         const content = await fs.readFile(filePath);
         const hash = sha1(content);
 
@@ -55,7 +58,13 @@ async function add(files) {
 
         console.log(chalk.green(`Added ${file} to staging area.`));
       } catch (error) {
-        console.error(chalk.red(`Error adding file ${file}:`, error.message));
+        // File doesn't exist - might be deleted, remove from index
+        if (error.code === 'ENOENT' && index[file]) {
+          delete index[file];
+          console.log(chalk.yellow(`Removed ${file} from staging area (deleted).`));
+        } else {
+          console.error(chalk.red(`Error adding file ${file}:`, error.message));
+        }
       }
     }
 

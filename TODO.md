@@ -31,8 +31,8 @@
 
 ## Merging
 
-- [ ] Implement merge command
-- [ ] Handle merge conflicts
-- [ ] Final testing
+- [x] Implement merge command
+- [x] Handle merge conflicts
+- [x] Final testing
 
 ![alt text](image.png)

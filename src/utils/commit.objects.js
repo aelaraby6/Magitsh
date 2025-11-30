@@ -28,7 +28,7 @@ async function getParentCommit(repoPath) {
   }
 }
 
-async function createCommitObject({ treeHash, parentHash, message, repoPath }) {
+async function createCommitObject({ treeHash, parentHash, message, repoPath, secondParent }) {
   const author = {
     name: "Conan",
     email: "conan@example.com",
@@ -40,6 +40,11 @@ async function createCommitObject({ treeHash, parentHash, message, repoPath }) {
 
   if (parentHash) {
     commitContent += `parent ${parentHash}\n`;
+  }
+
+  // Support merge commits with two parents
+  if (secondParent) {
+    commitContent += `parent ${secondParent}\n`;
   }
 
   commitContent += `author ${author.name} <${author.email}> ${author.timestamp} ${author.timezone}\n`;

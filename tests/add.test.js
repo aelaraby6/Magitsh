@@ -82,8 +82,10 @@ describe("Add Command", () => {
     const index = JSON.parse(indexData);
     const hash = index[testFile].hash;
 
-    // Check object file exists
-    const objectFile = path.join(objectsPath, hash);
+    // Check object file exists (Git format: objects/<dir>/<file>)
+    const dir = hash.substring(0, 2);
+    const file = hash.substring(2);
+    const objectFile = path.join(objectsPath, dir, file);
     const exists = await fs
       .access(objectFile)
       .then(() => true)
@@ -91,8 +93,12 @@ describe("Add Command", () => {
 
     expect(exists).toBe(true);
 
-    // Verify content matches
-    const storedContent = await fs.readFile(objectFile, "utf-8");
+    // Verify content matches (decompress blob object)
+    const zlib = require("zlib");
+    const compressed = await fs.readFile(objectFile);
+    const decompressed = zlib.inflateSync(compressed);
+    const nullIndex = decompressed.indexOf(0);
+    const storedContent = decompressed.slice(nullIndex + 1).toString("utf-8");
     expect(storedContent).toBe(content);
   });
 
@@ -229,9 +235,18 @@ describe("Add Command", () => {
     expect(index[binaryFile]).toBeDefined();
     expect(index[binaryFile].size).toBe(buffer.length);
 
-    // Verify stored object content
-    const objectFile = path.join(objectsPath, index[binaryFile].hash);
-    const storedContent = await fs.readFile(objectFile);
+    // Verify stored object content (Git format: objects/<dir>/<file>)
+    const hash = index[binaryFile].hash;
+    const dir = hash.substring(0, 2);
+    const file = hash.substring(2);
+    const objectFile = path.join(objectsPath, dir, file);
+
+    // Decompress blob object
+    const zlib = require("zlib");
+    const compressed = await fs.readFile(objectFile);
+    const decompressed = zlib.inflateSync(compressed);
+    const nullIndex = decompressed.indexOf(0);
+    const storedContent = decompressed.slice(nullIndex + 1);
     expect(storedContent).toEqual(buffer);
   });
 
