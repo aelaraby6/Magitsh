@@ -9,6 +9,7 @@ const { commit } = require("../src/commands/commit");
 const { log } = require("../src/commands/log");
 const { branch } = require("../src/commands/branch");
 const { checkout } = require("../src/commands/chekout");
+const { merge } = require("../src/commands/merge");
 
 program
   .name("mygit")
@@ -113,6 +114,19 @@ program
         branchName,
         createNew: options.b || false,
       });
+    } catch (error) {
+      console.error(chalk.red("Error:", error.message));
+      process.exit(1);
+    }
+  });
+
+// Merge command
+program
+  .command("merge <branch>")
+  .description("Merge a branch into the current branch")
+  .action(async (branchName) => {
+    try {
+      await merge(branchName);
     } catch (error) {
       console.error(chalk.red("Error:", error.message));
       process.exit(1);

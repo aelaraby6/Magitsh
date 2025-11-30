@@ -21,7 +21,7 @@ async function readCommitObject(hash, repoPath) {
 }
 
 function parseCommit(content) {
-  // commit [size]\0tree [hash]\nparent [hash]\nauthor ...\ncommitter ...\n\n[message]
+  // commit [size]\0tree [hash]\nparent [hash]\nparent [hash2] (for merges)\nauthor ...\ncommitter ...\n\n[message]
 
   const nullIndex = content.indexOf("\0");
   const body = content.substring(nullIndex + 1);
@@ -29,7 +29,8 @@ function parseCommit(content) {
   const lines = body.split("\n");
   const commit = {
     tree: null,
-    parent: null,
+    parents: [], // Changed to array to support multiple parents
+    parent: null, // Keep for backward compatibility
     author: null,
     authorDate: null,
     committer: null,
@@ -46,7 +47,12 @@ function parseCommit(content) {
     } else if (line.startsWith("tree ")) {
       commit.tree = line.substring(5).trim();
     } else if (line.startsWith("parent ")) {
-      commit.parent = line.substring(7).trim();
+      const parentHash = line.substring(7).trim();
+      commit.parents.push(parentHash);
+      // Keep first parent for backward compatibility
+      if (!commit.parent) {
+        commit.parent = parentHash;
+      }
     } else if (line.startsWith("author ")) {
       const authorInfo = parseAuthorLine(line.substring(7));
       commit.author = authorInfo.name;
