@@ -1,13 +1,13 @@
 const fs = require("fs").promises;
 const path = require("path");
 const chalk = require("chalk");
-const { ensureMyGit, readIndex, writeIndex } = require("../utils/files");
+const { ensureMagitsh, readIndex, writeIndex } = require("../utils/files");
 const { sha1, writeObject } = require("../utils/hash");
 const { getWorkingFiles } = require("../utils/getWorkFiles");
 
 async function add(files) {
   try {
-    const repoPath = await ensureMyGit();
+    const repoPath = await ensureMagitsh();
     const objectsPath = path.join(repoPath, "objects");
 
     // Ensure objects folder exists
@@ -45,7 +45,7 @@ async function add(files) {
           continue;
         }
 
-        // store in .mygit/objects
+        // store in .magitsh/objects
         await writeObject(repoPath, hash, content);
 
         // update index

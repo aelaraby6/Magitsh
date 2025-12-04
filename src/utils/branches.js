@@ -115,7 +115,7 @@ async function switchBranch(repoPath, branchName) {
   const exists = await branchExists(repoPath, branchName);
   if (!exists) {
     throw new Error(
-      `pathspec '${branchName}' did not match any file(s) known to mygit`
+      `pathspec '${branchName}' did not match any file(s) known to magitsh`
     );
   }
 

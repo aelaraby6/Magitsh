@@ -1,7 +1,7 @@
 const fs = require("fs").promises;
 const path = require("path");
 const chalk = require("chalk");
-const { readIndex, ensureMyGit } = require("../utils/files");
+const { readIndex, ensureMagitsh } = require("../utils/files");
 const { createTreeObject } = require("../utils/tree");
 const {
   getParentCommit,
@@ -11,7 +11,7 @@ const {
 
 async function commit(message) {
   try {
-    const repoPath = await ensureMyGit();
+    const repoPath = await ensureMagitsh();
 
     const index = await readIndex(repoPath);
 
@@ -24,7 +24,7 @@ async function commit(message) {
 
     if (!message) {
       console.log(chalk.red("Please provide a commit message."));
-      console.log(chalk.gray("Usage: mygit commit -m <message>"));
+      console.log(chalk.gray("Usage: magitsh commit -m <message>"));
       return;
     }
 

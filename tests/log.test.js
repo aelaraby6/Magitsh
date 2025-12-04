@@ -13,7 +13,7 @@ global.console = {
 
 describe("Log Command", () => {
   const testDir = path.join(__dirname, "test-log-repo");
-  const mygitPath = path.join(testDir, ".mygit");
+  const magitshPath = path.join(testDir, ".magitsh");
 
   beforeEach(async () => {
     await fs.mkdir(testDir, { recursive: true });
@@ -111,7 +111,7 @@ describe("Log Command", () => {
   });
 
   test("should fail gracefully if not in a repository", async () => {
-    await fs.rm(mygitPath, { recursive: true, force: true });
+    await fs.rm(magitshPath, { recursive: true, force: true });
     await log();
 
     expect(console.error).toHaveBeenCalledWith(

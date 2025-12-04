@@ -12,22 +12,22 @@ const {
 
 async function init() {
   try {
-    const mygitPath = path.join(process.cwd(), ".mygit");
+    const magitshPath = path.join(process.cwd(), ".magitsh");
 
     // Check if already initialized
     try {
-      await fs.access(mygitPath);
+      await fs.access(magitshPath);
       console.log(chalk.yellow("Repository already initialized"));
       return;
     } catch (err) {
-      await createDirectoryStructure(mygitPath);
-      await createConfigFile(mygitPath);
-      await createDescriptionFile(mygitPath);
-      await createHeadFile(mygitPath);
-      await createHooksSamples(mygitPath);
-      await createInfoExclude(mygitPath);
+      await createDirectoryStructure(magitshPath);
+      await createConfigFile(magitshPath);
+      await createDescriptionFile(magitshPath);
+      await createHeadFile(magitshPath);
+      await createHooksSamples(magitshPath);
+      await createInfoExclude(magitshPath);
 
-      console.log(chalk.green("Initialized empty MyGit repository in .mygit/"));
+      console.log(chalk.green("Initialized empty Magitsh repository in .magitsh/"));
     }
   } catch (error) {
     console.error(chalk.red("Error initializing repository:"), error.message);

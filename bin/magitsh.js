@@ -67,7 +67,7 @@ program
         console.log(
           chalk.red("Error: Please provide a commit message using -m flag")
         );
-        console.log(chalk.gray("Example: mygit commit -m 'Your message'"));
+        console.log(chalk.gray("Example: magitsh commit -m 'Your message'"));
         process.exit(1);
       }
       await commit(options.message);

@@ -13,7 +13,7 @@ global.console = {
 
 describe("Checkout Command", () => {
   const testDir = path.join(__dirname, "test-checkout-repo");
-  const mygitPath = path.join(testDir, ".mygit");
+  const magitshPath = path.join(testDir, ".magitsh");
 
   beforeEach(async () => {
     jest.spyOn(process, "exit").mockImplementation(() => {});
@@ -38,7 +38,7 @@ describe("Checkout Command", () => {
   test("should create new branch", async () => {
     await checkout({ branchName: "feature", createNew: true });
 
-    const branchPath = path.join(mygitPath, "refs", "heads", "feature");
+    const branchPath = path.join(magitshPath, "refs", "heads", "feature");
     const exists = await fs.access(branchPath).then(() => true).catch(() => false);
     
     expect(exists).toBe(true);
@@ -47,7 +47,7 @@ describe("Checkout Command", () => {
   test("should switch to new branch", async () => {
     await checkout({ branchName: "dev", createNew: true });
 
-    const headContent = await fs.readFile(path.join(mygitPath, "HEAD"), "utf8");
+    const headContent = await fs.readFile(path.join(magitshPath, "HEAD"), "utf8");
     expect(headContent.trim()).toBe("ref: refs/heads/dev");
   });
 
@@ -55,7 +55,7 @@ describe("Checkout Command", () => {
     await checkout({ branchName: "feature", createNew: true });
     await checkout({ branchName: "main", createNew: false });
 
-    const headContent = await fs.readFile(path.join(mygitPath, "HEAD"), "utf8");
+    const headContent = await fs.readFile(path.join(magitshPath, "HEAD"), "utf8");
     expect(headContent.trim()).toBe("ref: refs/heads/main");
   });
 });

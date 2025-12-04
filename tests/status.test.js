@@ -12,7 +12,7 @@ global.console = {
 
 describe("Status Command", () => {
     const testDir = path.join(__dirname, "test-status-repo");
-    const mygitPath = path.join(testDir, ".mygit");
+    const magitshPath = path.join(testDir, ".magitsh");
     const nonRepoDir = path.join(__dirname, "non-repo-status");
 
     beforeEach(async () => {
@@ -178,7 +178,7 @@ describe("Status Command", () => {
 
     test("should show current branch from HEAD file", async () => {
         // Change HEAD to point to different branch
-        const headPath = path.join(mygitPath, "HEAD");
+        const headPath = path.join(magitshPath, "HEAD");
         await fs.writeFile(headPath, "ref: refs/heads/develop\n");
 
         await status();
@@ -189,7 +189,7 @@ describe("Status Command", () => {
     });
 
     test("should default to main branch if HEAD is invalid", async () => {
-        const headPath = path.join(mygitPath, "HEAD");
+        const headPath = path.join(magitshPath, "HEAD");
         await fs.writeFile(headPath, "invalid content");
 
         await status();
@@ -199,7 +199,7 @@ describe("Status Command", () => {
         );
     });
 
-    test("should not show .mygit or node_modules in untracked files", async () => {
+    test("should not show .magitsh or node_modules in untracked files", async () => {
         await fs.mkdir("node_modules", { recursive: true });
         await fs.writeFile(path.join("node_modules", "package.json"), "{}");
 
@@ -214,7 +214,7 @@ describe("Status Command", () => {
             expect.stringContaining("node_modules")
         );
         expect(console.log).not.toHaveBeenCalledWith(
-            expect.stringContaining(".mygit")
+            expect.stringContaining(".magitsh")
         );
     });
 
@@ -244,7 +244,7 @@ describe("Status Command", () => {
         );
     });
 
-    test("should fail if not in a MyGit repository", async () => {
+    test("should fail if not in a Magitsh repository", async () => {
         await fs.mkdir(nonRepoDir, { recursive: true });
         process.chdir(nonRepoDir);
 

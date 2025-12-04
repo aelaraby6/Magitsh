@@ -5,7 +5,7 @@
 - [x] Create project structure
 - [x] Set up package.json
 - [x] Implement init command
-- [x] Create .mygit directory structure
+- [x] Create .magitsh directory structure
 - [x] Test init command
 
 ## File Tracking

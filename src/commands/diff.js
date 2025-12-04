@@ -1,7 +1,7 @@
 const fs = require("fs").promises;
 const path = require("path");
 const chalk = require("chalk");
-const { ensureMyGit, readIndex } = require("../utils/files");
+const { ensureMagitsh, readIndex } = require("../utils/files");
 const { readCommitObject } = require("../utils/parse");
 const { generateUnifiedDiff } = require("../utils/diff");
 const { getCommitTree, readObjectContent } = require("../utils/merge");
@@ -32,14 +32,14 @@ async function getCurrentCommit(repoPath) {
 }
 
 /**
- * - mygit diff (working tree vs staged/HEAD)
- * - mygit diff --staged (staged vs HEAD)
- * - mygit diff <commit> (working tree vs commit)
- * - mygit diff <commit1> <commit2> (commit1 vs commit2)
+ * - magitsh diff (working tree vs staged/HEAD)
+ * - magitsh diff --staged (staged vs HEAD)
+ * - magitsh diff <commit> (working tree vs commit)
+ * - magitsh diff <commit1> <commit2> (commit1 vs commit2)
  */
 async function diff(options = {}) {
     try {
-        const repoPath = await ensureMyGit();
+        const repoPath = await ensureMagitsh();
         const { staged, commits } = options;
 
         if (staged) {

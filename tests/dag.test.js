@@ -15,7 +15,7 @@ global.console = {
 
 describe("Advanced Merge - DAG and LCA", () => {
     const testDir = path.join(__dirname, "test-dag-repo");
-    const mygitPath = path.join(testDir, ".mygit");
+    const magitshPath = path.join(testDir, ".magitsh");
 
     beforeEach(async () => {
         await fs.mkdir(testDir, { recursive: true });
@@ -31,12 +31,12 @@ describe("Advanced Merge - DAG and LCA", () => {
     });
 
     async function getCurrentCommitHash() {
-        const headPath = path.join(mygitPath, "HEAD");
+        const headPath = path.join(magitshPath, "HEAD");
         const headContent = await fs.readFile(headPath, "utf-8");
         const match = headContent.match(/ref: (.+)/);
         if (!match) return null;
 
-        const branchPath = path.join(mygitPath, match[1].trim());
+        const branchPath = path.join(magitshPath, match[1].trim());
         try {
             const commitHash = await fs.readFile(branchPath, "utf-8");
             return commitHash.trim();
@@ -77,7 +77,7 @@ describe("Advanced Merge - DAG and LCA", () => {
         const commitD = await getCurrentCommitHash();
 
         // Test getAncestors includes all ancestors
-        const ancestors = await getAncestors(commitD, mygitPath);
+        const ancestors = await getAncestors(commitD, magitshPath);
 
         expect(ancestors).toContain(commitD);
         expect(ancestors).toContain(commitA);
@@ -118,7 +118,7 @@ describe("Advanced Merge - DAG and LCA", () => {
         const commitD = await getCurrentCommitHash();
 
         // LCA of any path should be A
-        const lca = await findCommonAncestor(commitB, commitC, mygitPath);
+        const lca = await findCommonAncestor(commitB, commitC, magitshPath);
         expect(lca).toBe(commitA);
     });
 
@@ -139,7 +139,7 @@ describe("Advanced Merge - DAG and LCA", () => {
         await commit("C");
         const commitC = await getCurrentCommitHash();
 
-        const ancestorsMap = await getAncestorsWithDistance(commitC, mygitPath);
+        const ancestorsMap = await getAncestorsWithDistance(commitC, magitshPath);
 
         expect(ancestorsMap.get(commitC)).toBe(0); // Distance to self
         expect(ancestorsMap.get(commitB)).toBe(1); // One step back
@@ -180,7 +180,7 @@ describe("Advanced Merge - DAG and LCA", () => {
         await commit("D");
 
         // Verify we can find ancestors across the DAG
-        const ancestors = await getAncestors(await getCurrentCommitHash(), mygitPath);
+        const ancestors = await getAncestors(await getCurrentCommitHash(), magitshPath);
         expect(ancestors).toContain(commitA);
     });
 
@@ -202,7 +202,7 @@ describe("Advanced Merge - DAG and LCA", () => {
         const commitC = await getCurrentCommitHash();
 
         // LCA of B and C should be B (C is descendant of B)
-        const lca = await findCommonAncestor(commitB, commitC, mygitPath);
+        const lca = await findCommonAncestor(commitB, commitC, magitshPath);
         expect(lca).toBe(commitB);
     });
 
@@ -302,7 +302,7 @@ describe("Advanced Merge - DAG and LCA", () => {
         const mainCommit = await getCurrentCommitHash();
 
         // Test getAncestorsWithDistance performance
-        const ancestors = await getAncestorsWithDistance(mainCommit, mygitPath);
+        const ancestors = await getAncestorsWithDistance(mainCommit, magitshPath);
 
         const endTime = Date.now();
         const duration = endTime - startTime;

@@ -13,11 +13,11 @@ global.console = {
 
 describe("Commit Command", () => {
   const testDir = path.join(__dirname, "test-commit-repo");
-  const mygitPath = path.join(testDir, ".mygit");
-  const objectsPath = path.join(mygitPath, "objects");
-  const indexPath = path.join(mygitPath, "index.json");
-  const headPath = path.join(mygitPath, "HEAD");
-  const refsPath = path.join(mygitPath, "refs", "heads");
+  const magitshPath = path.join(testDir, ".magitsh");
+  const objectsPath = path.join(magitshPath, "objects");
+  const indexPath = path.join(magitshPath, "index.json");
+  const headPath = path.join(magitshPath, "HEAD");
+  const refsPath = path.join(magitshPath, "refs", "heads");
 
   beforeEach(async () => {
     await fs.mkdir(testDir, { recursive: true });
@@ -48,7 +48,7 @@ describe("Commit Command", () => {
     const match = headContent.match(/ref: (.+)/);
     if (!match) return null;
 
-    const branchPath = path.join(mygitPath, match[1].trim());
+    const branchPath = path.join(magitshPath, match[1].trim());
     try {
       const commitHash = await fs.readFile(branchPath, "utf-8");
       return commitHash.trim();
@@ -362,7 +362,7 @@ describe("Commit Command", () => {
 
   test("should create refs/heads directory if it doesn't exist", async () => {
     // Remove refs directory
-    await fs.rm(path.join(mygitPath, "refs"), { recursive: true, force: true });
+    await fs.rm(path.join(magitshPath, "refs"), { recursive: true, force: true });
 
     const testFile = "test.txt";
     await fs.writeFile(testFile, "content");
@@ -379,7 +379,7 @@ describe("Commit Command", () => {
   });
 
   test("should fail gracefully if not in a repository", async () => {
-    await fs.rm(mygitPath, { recursive: true, force: true });
+    await fs.rm(magitshPath, { recursive: true, force: true });
 
     await commit("This should fail");
 

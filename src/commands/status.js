@@ -1,13 +1,13 @@
 const fs = require("fs").promises;
 const path = require("path");
 const chalk = require("chalk");
-const { ensureMyGit, readIndex } = require("../utils/files");
+const { ensureMagitsh, readIndex } = require("../utils/files");
 const { sha1 } = require("../utils/hash");
 const { getWorkingFiles } = require("../utils/getWorkFiles");
 
 async function status() {
     try {
-        const repoPath = await ensureMyGit();
+        const repoPath = await ensureMagitsh();
         const index = await readIndex(repoPath);
 
         const headPath = path.join(repoPath, "HEAD");
@@ -64,7 +64,7 @@ async function status() {
         
         if (staged.length > 0) {
             console.log(chalk.green("Changes to be committed:"));
-            console.log(chalk.gray("  (use \"mygit reset <file>...\" to unstage)"));
+            console.log(chalk.gray("  (use \"magitsh reset <file>...\" to unstage)"));
             console.log();
             for (const file of staged) {
                 console.log(chalk.green(`\tnew file:   ${file}`));
@@ -74,7 +74,7 @@ async function status() {
 
         if (modified.length > 0) {
             console.log(chalk.red("Changes not staged for commit:"));
-            console.log(chalk.gray("  (use \"mygit add <file>...\" to update what will be committed)"));
+            console.log(chalk.gray("  (use \"magitsh add <file>...\" to update what will be committed)"));
             console.log();
             for (const file of modified) {
                 console.log(chalk.red(`\tmodified:   ${file}`));
@@ -84,7 +84,7 @@ async function status() {
 
         if (deleted.length > 0) {
             console.log(chalk.red("Changes not staged for commit:"));
-            console.log(chalk.gray("  (use \"mygit add <file>...\" to update what will be committed)"));
+            console.log(chalk.gray("  (use \"magitsh add <file>...\" to update what will be committed)"));
             console.log();
             for (const file of deleted) {
                 console.log(chalk.red(`\tdeleted:    ${file}`));
@@ -94,7 +94,7 @@ async function status() {
 
         if (untracked.length > 0) {
             console.log(chalk.red("Untracked files:"));
-            console.log(chalk.gray("  (use \"mygit add <file>...\" to include in what will be committed)"));
+            console.log(chalk.gray("  (use \"magitsh add <file>...\" to include in what will be committed)"));
             console.log();
             for (const file of untracked) {
                 console.log(chalk.red(`\t${file}`));
