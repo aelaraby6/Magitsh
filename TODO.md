@@ -35,4 +35,9 @@
 - [x] Handle merge conflicts
 - [x] Final testing
 
-![alt text](image.png)
+## Diff Command
+
+- [x] Implement diff command
+- [x] Compare working directory with staging area
+- [x] Compare staging area with last commit
+- [x] Test diff functionality
