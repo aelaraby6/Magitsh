@@ -11,9 +11,9 @@ global.console = {
 
 describe("Add Command", () => {
   const testDir = path.join(__dirname, "test-add-repo");
-  const mygitPath = path.join(testDir, ".mygit");
-  const objectsPath = path.join(mygitPath, "objects");
-  const indexPath = path.join(mygitPath, "index.json");
+  const magitshPath = path.join(testDir, ".magitsh");
+  const objectsPath = path.join(magitshPath, "objects");
+  const indexPath = path.join(magitshPath, "index.json");
 
   beforeEach(async () => {
     await fs.mkdir(testDir, { recursive: true });
@@ -250,8 +250,8 @@ describe("Add Command", () => {
     expect(storedContent).toEqual(buffer);
   });
 
-  test("should fail if not in a MyGit repository", async () => {
-    // Create a new directory without .mygit
+  test("should fail if not in a Magitsh repository", async () => {
+    // Create a new directory without .magitsh
     const nonRepoDir = path.join(__dirname, "non-repo");
     await fs.mkdir(nonRepoDir, { recursive: true });
     process.chdir(nonRepoDir);
@@ -369,7 +369,7 @@ describe("Add Command", () => {
   });
 
   test("should show message when no files to add with '.'", async () => {
-    // No files created, only .mygit exists
+    // No files created, only .magitsh exists
     await add(["."]);
 
     expect(console.log).toHaveBeenCalledWith(

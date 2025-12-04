@@ -14,7 +14,7 @@ global.console = {
 
 describe("Merge Command", () => {
     const testDir = path.join(__dirname, "test-merge-repo");
-    const mygitPath = path.join(testDir, ".mygit");
+    const magitshPath = path.join(testDir, ".magitsh");
 
     beforeEach(async () => {
         await fs.mkdir(testDir, { recursive: true });
@@ -192,7 +192,7 @@ describe("Merge Command", () => {
 
         // Verify MERGE_HEAD file created
         const mergeHeadExists = await fs
-            .access(path.join(mygitPath, "MERGE_HEAD"))
+            .access(path.join(magitshPath, "MERGE_HEAD"))
             .then(() => true)
             .catch(() => false);
         expect(mergeHeadExists).toBe(true);
@@ -255,7 +255,7 @@ describe("Merge Command", () => {
         await commit("Initial commit");
 
         // Simulate detached HEAD
-        const headPath = path.join(mygitPath, "HEAD");
+        const headPath = path.join(magitshPath, "HEAD");
         await fs.writeFile(headPath, "abc123def456");
 
         await merge("feature");

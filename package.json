@@ -1,13 +1,13 @@
 {
-  "name": "mygit",
+  "name": "magitsh",
   "version": "1.0.0",
   "description": "A simple Git-like version control system built with Node.js",
   "main": "src/index.js",
   "bin": {
-    "mygit": "./bin/mygit.js"
+    "magitsh": "./bin/magitsh.js"
   },
   "scripts": {
-    "start": "node bin/mygit.js",
+    "start": "node bin/magitsh.js",
     "test": "jest",
     "test:watch": "jest --watch"
   },

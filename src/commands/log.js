@@ -2,12 +2,12 @@ const fs = require("fs").promises;
 const path = require("path");
 const zlib = require("zlib");
 const chalk = require("chalk");
-const { ensureMyGit } = require("../utils/files");
+const { ensureMagitsh } = require("../utils/files");
 const { readCommitObject, displayCommit } = require("../utils/parse");
 
 async function log() {
   try {
-    const repoPath = await ensureMyGit();
+    const repoPath = await ensureMagitsh();
 
     const headPath = path.join(repoPath, "HEAD");
     const headContent = await fs.readFile(headPath, "utf-8");
@@ -29,7 +29,7 @@ async function log() {
       console.log(chalk.yellow("No commits yet"));
       console.log(
         chalk.gray(
-          "Use 'mygit commit -m \"message\"' to create your first commit"
+          "Use 'magitsh commit -m \"message\"' to create your first commit"
         )
       );
       return;

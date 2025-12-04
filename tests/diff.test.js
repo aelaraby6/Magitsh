@@ -13,7 +13,7 @@ global.console = {
 
 describe("Diff Command", () => {
     const testDir = path.join(__dirname, "test-diff-repo");
-    const mygitPath = path.join(testDir, ".mygit");
+    const magitshPath = path.join(testDir, ".magitsh");
 
     beforeEach(async () => {
         await fs.mkdir(testDir, { recursive: true });
@@ -29,12 +29,12 @@ describe("Diff Command", () => {
     });
 
     async function getCurrentCommitHash() {
-        const headPath = path.join(mygitPath, "HEAD");
+        const headPath = path.join(magitshPath, "HEAD");
         const headContent = await fs.readFile(headPath, "utf-8");
         const match = headContent.match(/ref: (.+)/);
         if (!match) return null;
 
-        const branchPath = path.join(mygitPath, match[1].trim());
+        const branchPath = path.join(magitshPath, match[1].trim());
         try {
             const commitHash = await fs.readFile(branchPath, "utf-8");
             return commitHash.trim();

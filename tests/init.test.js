@@ -10,7 +10,7 @@ global.console = {
 
 describe("Init Command", () => {
   const testDir = path.join(__dirname, "test-repo");
-  const mygitPath = path.join(testDir, ".mygit");
+  const magitshPath = path.join(testDir, ".magitsh");
 
   beforeEach(async () => {
     await fs.mkdir(testDir, { recursive: true });
@@ -22,11 +22,11 @@ describe("Init Command", () => {
     await fs.rm(testDir, { recursive: true, force: true });
   });
 
-  test("should create .mygit directory", async () => {
+  test("should create .magitsh directory", async () => {
     await init();
 
     const exists = await fs
-      .access(mygitPath)
+      .access(magitshPath)
       .then(() => true)
       .catch(() => false);
 
@@ -37,14 +37,14 @@ describe("Init Command", () => {
     await init();
 
     const dirsToCheck = [
-      ".mygit/objects",
-      ".mygit/objects/info",
-      ".mygit/objects/pack",
-      ".mygit/refs",
-      ".mygit/refs/heads",
-      ".mygit/refs/tags",
-      ".mygit/hooks",
-      ".mygit/info",
+      ".magitsh/objects",
+      ".magitsh/objects/info",
+      ".magitsh/objects/pack",
+      ".magitsh/refs",
+      ".magitsh/refs/heads",
+      ".magitsh/refs/tags",
+      ".magitsh/hooks",
+      ".magitsh/info",
     ];
 
     for (const dir of dirsToCheck) {
@@ -61,7 +61,7 @@ describe("Init Command", () => {
   test("should create config file with correct content", async () => {
     await init();
 
-    const configPath = path.join(mygitPath, "config");
+    const configPath = path.join(magitshPath, "config");
     const content = await fs.readFile(configPath, "utf-8");
 
     expect(content).toContain("[core]");
@@ -72,7 +72,7 @@ describe("Init Command", () => {
   test("should create HEAD file", async () => {
     await init();
 
-    const headPath = path.join(mygitPath, "HEAD");
+    const headPath = path.join(magitshPath, "HEAD");
     const content = await fs.readFile(headPath, "utf-8");
 
     expect(content).toBe("ref: refs/heads/main\n");
@@ -81,7 +81,7 @@ describe("Init Command", () => {
   test("should create description file", async () => {
     await init();
 
-    const descPath = path.join(mygitPath, "description");
+    const descPath = path.join(magitshPath, "description");
     const exists = await fs
       .access(descPath)
       .then(() => true)
@@ -93,8 +93,8 @@ describe("Init Command", () => {
   test("should create hooks sample files", async () => {
     await init();
 
-    const preCommitPath = path.join(mygitPath, "hooks", "pre-commit.sample");
-    const commitMsgPath = path.join(mygitPath, "hooks", "commit-msg.sample");
+    const preCommitPath = path.join(magitshPath, "hooks", "pre-commit.sample");
+    const commitMsgPath = path.join(magitshPath, "hooks", "commit-msg.sample");
 
     const preCommitExists = await fs
       .access(preCommitPath)
@@ -113,7 +113,7 @@ describe("Init Command", () => {
   test("should create info/exclude file", async () => {
     await init();
 
-    const excludePath = path.join(mygitPath, "info", "exclude");
+    const excludePath = path.join(magitshPath, "info", "exclude");
     const exists = await fs
       .access(excludePath)
       .then(() => true)

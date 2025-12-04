@@ -13,7 +13,7 @@ const { merge } = require("../src/commands/merge");
 const { diff } = require("../src/commands/diff");
 
 program
-  .name("mygit")
+  .name("magitsh")
   .description("A simple Git-like version control system")
   .version("1.0.0");
 
@@ -67,7 +67,7 @@ program
         console.log(
           chalk.red("Error: Please provide a commit message using -m flag")
         );
-        console.log(chalk.gray("Example: mygit commit -m 'Your message'"));
+        console.log(chalk.gray("Example: magitsh commit -m 'Your message'"));
         process.exit(1);
       }
       await commit(options.message);

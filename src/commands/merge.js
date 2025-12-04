@@ -1,7 +1,7 @@
 const fs = require("fs").promises;
 const path = require("path");
 const chalk = require("chalk");
-const { ensureMyGit, readIndex, writeIndex } = require("../utils/files");
+const { ensureMagitsh, readIndex, writeIndex } = require("../utils/files");
 const {
     findCommonAncestor,
     getCommitTree,
@@ -17,7 +17,7 @@ const { createCommitObject, updateRefs } = require("../utils/commit.objects");
 
 async function merge(branchName) {
     try {
-        const repoPath = await ensureMyGit();
+        const repoPath = await ensureMagitsh();
 
         if (!branchName) {
             throw new Error("Please specify a branch to merge");
@@ -138,8 +138,8 @@ async function merge(branchName) {
             }
 
             console.log(chalk.yellow("\nAutomatic merge failed; fix conflicts and then commit the result."));
-            console.log(chalk.gray("Use 'mygit add <file>' to mark resolution"));
-            console.log(chalk.gray("Use 'mygit commit' to complete the merge"));
+            console.log(chalk.gray("Use 'magitsh add <file>' to mark resolution"));
+            console.log(chalk.gray("Use 'magitsh commit' to complete the merge"));
 
             const mergeHeadPath = path.join(repoPath, "MERGE_HEAD");
             await fs.writeFile(mergeHeadPath, incomingCommitHash);

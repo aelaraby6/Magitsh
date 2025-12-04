@@ -2,7 +2,7 @@ const fs = require("fs").promises;
 const path = require("path");
 
 // Config File
-async function createConfigFile(mygitPath) {
+async function createConfigFile(magitshPath) {
   const configContent = `[core]
 	repositoryformatversion = 0
 	filemode = true
@@ -10,27 +10,27 @@ async function createConfigFile(mygitPath) {
 	logallrefupdates = true
 `;
 
-  await fs.writeFile(path.join(mygitPath, "config"), configContent);
+  await fs.writeFile(path.join(magitshPath, "config"), configContent);
 }
 
 // Desc File
-async function createDescriptionFile(mygitPath) {
+async function createDescriptionFile(magitshPath) {
   const descriptionContent =
     "Unnamed repository; edit this file 'description' to name the repository.\n";
 
-  await fs.writeFile(path.join(mygitPath, "description"), descriptionContent);
+  await fs.writeFile(path.join(magitshPath, "description"), descriptionContent);
 }
 
 // Head File
-async function createHeadFile(mygitPath, defaultBranch = "main") {
+async function createHeadFile(magitshPath, defaultBranch = "main") {
   const headContent = `ref: refs/heads/${defaultBranch}\n`;
 
-  await fs.writeFile(path.join(mygitPath, "HEAD"), headContent);
+  await fs.writeFile(path.join(magitshPath, "HEAD"), headContent);
 }
 
 // Hooks Samples
-async function createHooksSamples(mygitPath) {
-  const hooksPath = path.join(mygitPath, "hooks");
+async function createHooksSamples(magitshPath) {
+  const hooksPath = path.join(magitshPath, "hooks");
 
   // pre-commit.sample
   const preCommitSample = `#!/bin/sh
@@ -64,7 +64,7 @@ exit 0
 }
 
 // Info Folder
-async function createInfoExclude(mygitPath) {
+async function createInfoExclude(magitshPath) {
   const excludeContent = `# git ls-files --others --exclude-from=.git/info/exclude
 # Lines that start with '#' are comments.
 # For a project mostly in C, the following would be a good set of
@@ -73,26 +73,26 @@ async function createInfoExclude(mygitPath) {
 # *~
 `;
 
-  await fs.writeFile(path.join(mygitPath, "info", "exclude"), excludeContent);
+  await fs.writeFile(path.join(magitshPath, "info", "exclude"), excludeContent);
 }
 
 // Create Main Structure
-async function createDirectoryStructure(mygitPath) {
-  await fs.mkdir(mygitPath);
+async function createDirectoryStructure(magitshPath) {
+  await fs.mkdir(magitshPath);
 
   // Objects
-  await fs.mkdir(path.join(mygitPath, "objects"));
-  await fs.mkdir(path.join(mygitPath, "objects", "info"));
-  await fs.mkdir(path.join(mygitPath, "objects", "pack"));
+  await fs.mkdir(path.join(magitshPath, "objects"));
+  await fs.mkdir(path.join(magitshPath, "objects", "info"));
+  await fs.mkdir(path.join(magitshPath, "objects", "pack"));
 
   // Refs
-  await fs.mkdir(path.join(mygitPath, "refs"));
-  await fs.mkdir(path.join(mygitPath, "refs", "heads"));
-  await fs.mkdir(path.join(mygitPath, "refs", "tags"));
+  await fs.mkdir(path.join(magitshPath, "refs"));
+  await fs.mkdir(path.join(magitshPath, "refs", "heads"));
+  await fs.mkdir(path.join(magitshPath, "refs", "tags"));
 
-  await fs.mkdir(path.join(mygitPath, "hooks"));
+  await fs.mkdir(path.join(magitshPath, "hooks"));
 
-  await fs.mkdir(path.join(mygitPath, "info"));
+  await fs.mkdir(path.join(magitshPath, "info"));
 }
 
 module.exports = {

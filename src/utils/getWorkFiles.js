@@ -8,7 +8,7 @@ async function getWorkingFiles(dir, fileList = [], baseDir = dir) {
         const filePath = path.join(dir, file);
         const stat = await fs.stat(filePath);
 
-        if (file === ".mygit" || file === "node_modules" || file === ".git") {
+        if (file === ".magitsh" || file === "node_modules" || file === ".git") {
             continue;
         }
 

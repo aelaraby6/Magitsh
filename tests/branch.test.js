@@ -14,7 +14,7 @@ global.console = {
 
 describe("Branch Command", () => {
   const testDir = path.join(__dirname, "test-branch-repo");
-  const mygitPath = path.join(testDir, ".mygit");
+  const magitshPath = path.join(testDir, ".magitsh");
 
   beforeEach(async () => {
     jest.spyOn(process, "exit").mockImplementation(() => {});

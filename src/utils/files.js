@@ -3,12 +3,12 @@ const fs = require("fs").promises;
 const path = require("path");
 
 
-async function ensureMyGit(){
-    const repoPath = path.join(process.cwd() , ".mygit");
+async function ensureMagitsh(){
+    const repoPath = path.join(process.cwd() , ".magitsh");
     try{
         await fs.access(repoPath);
     } catch{
-        throw new Error("Not a MyGit repository (or any of the parent directories): .mygit");
+        throw new Error("Not a Magitsh repository (or any of the parent directories): .magitsh");
     }
     return repoPath;
 }
@@ -30,4 +30,4 @@ async function writeIndex(repoPath , indexData){
     await fs.writeFile(indexPath , JSON.stringify(indexData , null , 2));
 }
 
-module.exports = { ensureMyGit , readIndex , writeIndex };
+module.exports = { ensureMagitsh , readIndex , writeIndex };

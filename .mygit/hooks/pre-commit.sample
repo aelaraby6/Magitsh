@@ -1,8 +1,0 @@
-#!/bin/sh
-# Pre-commit hook example
-# Remove .sample extension to activate
-
-echo "Running pre-commit checks..."
-
-# Add your checks here
-exit 0

@@ -1,17 +1,17 @@
 class Repository {
   constructor(path) {
     this.path = path;
-    this.mygitPath = `${path}/.mygit`;
+    this.magitshPath = `${path}/.magitsh`;
   }
 
   // TODO: Implement repository initialization
   async init() {
-    // Create .mygit structure
+    // Create .magitsh structure
   }
 
   // TODO: Check if current directory is a repository
   async isRepository() {
-    // Check for .mygit directory
+    // Check for .magitsh directory
   }
 }
 
