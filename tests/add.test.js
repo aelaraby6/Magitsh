@@ -14,6 +14,7 @@ describe("Add Command", () => {
   const mygitPath = path.join(testDir, ".mygit");
   const objectsPath = path.join(mygitPath, "objects");
   const indexPath = path.join(mygitPath, "index.json");
+  const nonRepoDir = path.join(__dirname, "non-repo");
 
   beforeEach(async () => {
     await fs.mkdir(testDir, { recursive: true });
@@ -25,7 +26,22 @@ describe("Add Command", () => {
 
   afterEach(async () => {
     process.chdir(__dirname);
-    await fs.rm(testDir, { recursive: true, force: true });
+    await new Promise(resolve => setTimeout(resolve, 100));
+    try {
+      await fs.rm(testDir, { recursive: true, force: true });
+    } catch (error) {
+      // ignore cleanup errors
+    }
+  });
+
+  afterAll(async () => {
+    process.chdir(__dirname);
+    await new Promise(resolve => setTimeout(resolve, 100));
+    try {
+      await fs.rm(nonRepoDir, { recursive: true, force: true });
+    } catch (error) {
+      // ignore cleanup errors
+    }
   });
 
   test("should add a single file to staging area", async () => {
@@ -252,7 +268,6 @@ describe("Add Command", () => {
 
   test("should fail if not in a MyGit repository", async () => {
     // Create a new directory without .mygit
-    const nonRepoDir = path.join(__dirname, "non-repo");
     await fs.mkdir(nonRepoDir, { recursive: true });
     process.chdir(nonRepoDir);
 
@@ -265,7 +280,7 @@ describe("Add Command", () => {
       expect.stringContaining("Error in add command")
     );
 
-    await fs.rm(nonRepoDir, { recursive: true, force: true });
+    process.chdir(__dirname);
   });
 
   test("should create objects directory if it doesn't exist", async () => {

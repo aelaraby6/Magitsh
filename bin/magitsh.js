@@ -13,7 +13,7 @@ const { merge } = require("../src/commands/merge");
 const { diff } = require("../src/commands/diff");
 
 program
-  .name("mygit")
+  .name("magitsh")
   .description("A simple Git-like version control system")
   .version("1.0.0");
 
