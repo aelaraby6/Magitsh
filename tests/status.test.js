@@ -13,6 +13,7 @@ global.console = {
 describe("Status Command", () => {
     const testDir = path.join(__dirname, "test-status-repo");
     const magitshPath = path.join(testDir, ".magitsh");
+    const nonRepoDir = path.join(__dirname, "non-repo-status");
 
     beforeEach(async () => {
         await fs.mkdir(testDir, { recursive: true });
@@ -24,7 +25,22 @@ describe("Status Command", () => {
 
     afterEach(async () => {
         process.chdir(__dirname);
-        await fs.rm(testDir, { recursive: true, force: true });
+        await new Promise(resolve => setTimeout(resolve, 100));
+        try {
+            await fs.rm(testDir, { recursive: true, force: true });
+        } catch (error) {
+            // ignore cleanup errors
+        }
+    });
+
+    afterAll(async () => {
+        process.chdir(__dirname);
+        await new Promise(resolve => setTimeout(resolve, 100));
+        try {
+            await fs.rm(nonRepoDir, { recursive: true, force: true });
+        } catch (error) {
+            // ignore cleanup errors
+        }
     });
 
     test("should show clean working tree when no files exist", async () => {
@@ -229,7 +245,6 @@ describe("Status Command", () => {
     });
 
     test("should fail if not in a Magitsh repository", async () => {
-        const nonRepoDir = path.join(__dirname, "non-repo-status");
         await fs.mkdir(nonRepoDir, { recursive: true });
         process.chdir(nonRepoDir);
 
@@ -239,7 +254,7 @@ describe("Status Command", () => {
             expect.stringContaining("Error in status command")
         );
 
-        await fs.rm(nonRepoDir, { recursive: true, force: true });
+        process.chdir(__dirname);
     });
 
     test("should handle multiple modified files", async () => {
