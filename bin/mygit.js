@@ -10,6 +10,7 @@ const { log } = require("../src/commands/log");
 const { branch } = require("../src/commands/branch");
 const { checkout } = require("../src/commands/chekout");
 const { merge } = require("../src/commands/merge");
+const { diff } = require("../src/commands/diff");
 
 program
   .name("mygit")
@@ -127,6 +128,24 @@ program
   .action(async (branchName) => {
     try {
       await merge(branchName);
+    } catch (error) {
+      console.error(chalk.red("Error:", error.message));
+      process.exit(1);
+    }
+  });
+
+// Diff command
+program
+  .command("diff [commits...]")
+  .description("Show changes between commits, commit and working tree, etc")
+  .option("--staged", "Show changes staged for commit")
+  .option("--cached", "Synonym for --staged")
+  .action(async (commits, options) => {
+    try {
+      await diff({
+        staged: options.staged || options.cached,
+        commits: commits || [],
+      });
     } catch (error) {
       console.error(chalk.red("Error:", error.message));
       process.exit(1);
