@@ -11,9 +11,16 @@ Ever wondered how Git actually works? **magitsh** is a fully functional Git impl
 - **Complete CLI** - All essential Git commands: init, add, commit, branch, checkout, merge, diff, log, status
 - **Production Ready** - Published on npm with full test coverage using Jest
 
-<img width="957" height="617" alt="image" src="https://github.com/user-attachments/assets/32c4f4c8-5b7d-4915-88e2-e1210dfe2a94" />
+<img width="1280" height="570" alt="image" src="https://github.com/user-attachments/assets/9966f6d6-c8bc-4a5b-826d-44ea530c6d33" />
 
-<img width="785" height="598" alt="image" src="https://github.com/user-attachments/assets/1ca2d50f-08ae-4b0b-808f-3d466b9b7605" />
+---
+
+<img width="1280" height="712" alt="image" src="https://github.com/user-attachments/assets/3851e92a-1f2a-4495-b995-6988896400a6" />
+
+---
+
+<img width="1256" height="501" alt="image" src="https://github.com/user-attachments/assets/91a79156-39f1-4639-b34e-16e2a6942013" />
+
 
 ## 🎯 Commands
 
@@ -127,7 +134,9 @@ npm install -g magitsh
 ```bash
 npm test
 ```
-<img width="663" height="500" alt="image" src="https://github.com/user-attachments/assets/414ef656-97e0-475c-a454-b070566c26d3" />
+
+<img width="1280" height="567" alt="image" src="https://github.com/user-attachments/assets/b7bded45-f30c-4a19-aa07-d72a44c21f18" />
+
 
 
 ## 👥 Contributors
