@@ -1,124 +1,146 @@
-# Magitsh 🔮
+# 🔮 Magitsh — A Minimal Git Implementation for Learning Version Control
 
-A simple Git-like version control system built with Node.js for learning and educational purposes.
+Magitsh is a lightweight, Git-like version control system built entirely with Node.js, created as an educational project to understand how Git works internally — object storage, commits, branches, diffs, merges, and more.
 
-[![npm version](https://badge.fury.io/js/magitsh.svg)](https://www.npmjs.com/package/magitsh)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+This project is built by:
 
-## Installation
+- Zeyad Zahran — https://github.com/Zeyadzahran
+- aelaraby6 — https://github.com/aelaraby6
 
-```bash
+We built this to demystify Git internals and give learners a minimal, functional VCS they can read, modify, and explore.
+
+---
+
+## 📦 Installation
+
+```
 npm install -g magitsh
 ```
 
-## Usage
+---
+
+## 🚀 Quick Start
 
 ### Initialize a repository
 
-```bash
+```
 magitsh init
 ```
 
-### Add files to staging area
+### Add files
 
-```bash
-magitsh add <file>        # Add specific file
-magitsh add file1 file2   # Add multiple files
-magitsh add .             # Add all files
 ```
-
-### Check status
-
-```bash
-magitsh status
+magitsh add <file>          # Add a file
+magitsh add file1 file2     # Add multiple files
+magitsh add .               # Add everything
 ```
 
 ### Commit changes
 
-```bash
-magitsh commit -m "Your commit message"
+```
+magitsh commit -m "My first commit"
+```
+
+### View repository status
+
+```
+magitsh status
 ```
 
 ### View commit history
 
-```bash
+```
 magitsh log
 ```
 
-### Branch operations
+---
 
-```bash
-magitsh branch              # List all branches
-magitsh checkout <branch>   # Switch to a branch
-magitsh checkout -b <name>  # Create and switch to new branch
+## 🌿 Branching
+
+```
+magitsh branch               # List branches
+magitsh checkout <name>      # Switch branches
+magitsh checkout -b <name>   # Create + switch
 ```
 
-### Merge branches
+---
 
-```bash
+## 🔀 Merge Branches
+
+```
 magitsh merge <branch>
 ```
 
-### View differences
+Supports:
+- Fast-forward merges  
+- Three-way merges  
+- Conflict detection  
 
-```bash
-magitsh diff                      # Working tree vs staged
-magitsh diff --staged             # Staged vs HEAD
-magitsh diff <commit>             # Working tree vs commit
-magitsh diff <commit1> <commit2>  # Between two commits
+---
+
+## 🧩 Diff Viewer
+
+```
+magitsh diff
+magitsh diff --staged
+magitsh diff <commit>
+magitsh diff <commit1> <commit2>
 ```
 
-## Features
+---
 
-- ✅ Repository initialization (`.magitsh` directory)
-- ✅ File staging with content hashing (SHA-1)
-- ✅ Commit creation with tree objects
-- ✅ Commit history (log)
-- ✅ Branch creation and switching
-- ✅ Merge with conflict detection (fast-forward & three-way)
-- ✅ Diff viewing (multiple modes)
-- ✅ Zlib compression for objects
+# ⚙️ Features
 
-## How It Works
+- Repository initialization (`.magitsh`)
+- Staging area with SHA-1 hashing
+- Commit objects & tree structure
+- Branching with HEAD management
+- Commit history traversal (log)
+- Merge engine (fast-forward + 3-way)
+- Diff engine (working, staged, commit)
+- Zlib compression for objects
+- Fully file-system based VCS
 
-Magitsh stores data in a `.magitsh` directory with the following structure:
+---
+
+# 🗂 Internal Structure
 
 ```
 .magitsh/
-├── HEAD              # Points to current branch
-├── config            # Repository configuration
-├── description       # Repository description
-├── hooks/            # Git hooks (samples)
-├── index.json        # Staging area
+├── HEAD
+├── config
+├── description
+├── hooks/
+├── index.json
 ├── info/
-│   └── exclude       # Ignore patterns
-├── objects/          # Content-addressable storage
-│   ├── <dir>/        # First 2 chars of hash
-│   │   └── <file>    # Remaining 38 chars (compressed)
+│   └── exclude
+├── objects/
+│   ├── xx/xxxx...      # Compressed objects
 │   ├── info/
 │   └── pack/
 └── refs/
-    ├── heads/        # Branch references
-    └── tags/         # Tag references
+    ├── heads/
+    └── tags/
 ```
 
-## Development
+---
 
-```bash
-# Clone the repository
+# 🛠 Development
+
+```
 git clone https://github.com/aelaraby6/Magitsh.git
 cd Magitsh
 
-# Install dependencies
 npm install
-
-# Run tests
 npm test
 
-# Run the CLI locally
 node bin/magitsh.js <command>
 ```
 
-## License
+---
 
-MIT © [aelaraby6](https://github.com/aelaraby6)
+# 📜 License
+
+MIT ©  aelaraby6
+
+MIT © [Zeyad Zahran](https://github.com/Zeyadzahran) & [aelaraby6](https://github.com/aelaraby6)
