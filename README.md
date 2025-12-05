@@ -141,6 +141,4 @@ node bin/magitsh.js <command>
 
 # 📜 License
 
-MIT ©  aelaraby6
-
 MIT © [Zeyad Zahran](https://github.com/Zeyadzahran) & [aelaraby6](https://github.com/aelaraby6)
