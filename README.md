@@ -1,142 +1,146 @@
-# Magitsh — A Minimal Git Implementation for Learning Version Control
+# Magitsh
 
-Magitsh is a lightweight, Git-like version control system built entirely with Node.js, created as an educational project to understand how Git works internally — object storage, commits, branches, diffs, merges, and more.
+Ever wondered how Git actually works? **magitsh** is a fully functional Git implementation built with Node.js. No magic, just clean code you can read and understand.
 
-This project is built by: [Zeyad Zahran](https://github.com/Zeyadzahran) & [aelaraby6](https://github.com/aelaraby6)
+## ✨ Features
 
+- **Real Git Objects** - Implements blobs, trees, and commits with SHA-1 hashing and zlib compression
+- **Async File System** - Built on Node.js fs/promises for efficient non-blocking file operations and recursive directory handling
+- **Graph Algorithms** - Uses DAG data structures with BFS traversal for commit history and merge base detection
+- **Smart Merging** - Three-way merge algorithm with automatic conflict detection and resolution
+- **Complete CLI** - All essential Git commands: init, add, commit, branch, checkout, merge, diff, log, status
+- **Production Ready** - Published on npm with full test coverage using Jest
 
-We built this to demystify Git internals and give learners a minimal, functional VCS they can read, modify, and explore.
+## 🎯 Commands
 
----
-
-## Installation
-
-```
-npm install -g magitsh
-```
-
----
-
-## Quick Start
-
-### Initialize a repository
-
-```
-magitsh init
-```
-
-### Add files
-
-```
-magitsh add <file>          # Add a file
-magitsh add file1 file2     # Add multiple files
-magitsh add .               # Add everything
+```bash
+magitsh init              # Initialize repository
+magitsh add <files>       # Stage files
+magitsh commit -m "msg"   # Create commit
+magitsh status            # Check status
+magitsh log               # View history
+magitsh branch            # List branches
+magitsh checkout <branch> # Switch branches
+magitsh checkout -b <br>  # Create new branch
+magitsh merge <branch>    # Merge branches
+magitsh diff              # Show changes
 ```
 
-### Commit changes
+## 🏗️ How It Works
 
-```
-magitsh commit -m "My first commit"
-```
-
-### View repository status
-
-```
-magitsh status
-```
-
-### View commit history
-
-```
-magitsh log
-```
-
----
-
-## Branching
-
-```
-magitsh branch               # List branches
-magitsh checkout <name>      # Switch branches
-magitsh checkout -b <name>   # Create + switch
-```
-
----
-
-## Merge Branches
-
-```
-magitsh merge <branch>
-```
-
-Supports:
-- Fast-forward merges  
-- Three-way merges  
-- Conflict detection  
-
----
-
-## Diff Viewer
-
-```
-magitsh diff
-magitsh diff --staged
-magitsh diff <commit>
-magitsh diff <commit1> <commit2>
-```
-
----
-
-# Features
-
-- Repository initialization (`.magitsh`)
-- Staging area with SHA-1 hashing
-- Commit objects & tree structure
-- Branching with HEAD management
-- Commit history traversal (log)
-- Merge engine (fast-forward + 3-way)
-- Diff engine (working, staged, commit)
-- Zlib compression for objects
-- Fully file-system based VCS
-
----
-
-# 🗂 Internal Structure
+### Repository Structure
 
 ```
 .magitsh/
-├── HEAD
-├── config
-├── description
-├── hooks/
-├── index.json
-├── info/
-│   └── exclude
-├── objects/
-│   ├── xx/xxxx...      # Compressed objects
+├── objects/           # Content-addressed storage
+│   ├── [ab]/[cdef]   # Blobs, trees, commits (SHA-1 based)
 │   ├── info/
 │   └── pack/
-└── refs/
-    ├── heads/
-    └── tags/
+├── refs/
+│   ├── heads/        # Branch pointers
+│   └── tags/         # Tag references
+├── hooks/            # Hook samples
+│   ├── pre-commit.sample
+│   └── commit-msg.sample
+├── info/
+│   └── exclude       # Gitignore patterns
+├── HEAD              # Current branch (ref: refs/heads/main)
+├── index.json        # Staging area
+├── config            # Repository config
+└── description       # Repository description
 ```
 
----
+### Core Concepts
 
-# 🛠 Development
+**Objects**: Everything is stored as content-addressed objects
+- **Blobs**: File contents (compressed with zlib)
+- **Trees**: Directory structures (mode + name + hash)
+- **Commits**: Snapshots with parent pointers (supports multiple parents)
 
+**DAG (Graph)**: Commits form a directed acyclic graph
+- BFS traversal for finding lowest common ancestor
+- Distance tracking for merge base detection
+- Topological ordering for commit history
+
+**Branches**: Lightweight references to commits
+- Stored as text files in `refs/heads/`
+- HEAD points to current branch
+- Branch validation ensures safe names
+
+## 🛠️ Built With
+
+- **Node.js** - Runtime environment
+- **Commander.js** - CLI argument parsing
+- **Chalk** - Terminal styling and colors
+- **Jest** - Testing framework
+- **zlib** - Compression (deflate/inflate)
+- **crypto** - SHA-1 hashing
+- **fs/promises** - Async file operations
+
+
+## 🎯 Key Algorithms
+
+### Three-Way Merge
 ```
-git clone https://github.com/aelaraby6/Magitsh.git
-cd Magitsh
+Base (LCA)     Current (HEAD)    Incoming (feature)
+    |               |                    |
+    └───────────────┴────────────────────┘
+                    ↓
+         Conflict Detection:
+         • modify-modify: Both changed differently
+         • add-add: Both added different content
+         • delete-modify: Deleted vs modified
+         • modify-delete: Modified vs deleted
+                    ↓
+         Auto-merge clean changes
+                    ↓
+         Create conflict markers for conflicts
+```
 
-npm install
+### Lowest Common Ancestor (LCA)
+```javascript
+// BFS from both commits simultaneously
+const ancestors1 = getAncestorsWithDistance(commit1);
+const ancestors2 = getAncestorsWithDistance(commit2);
+
+// Find common ancestors
+const common = findIntersection(ancestors1, ancestors2);
+
+// Select LCA with minimum total distance
+return common.sort((a, b) => 
+  (a.dist1 + a.dist2) - (b.dist1 + b.dist2)
+)[0];
+```
+
+### Installation
+
+```bash
+npm install -g magitsh
+```
+
+## 🧪 Testing
+
+```bash
 npm test
-
-node bin/magitsh.js <command>
 ```
 
----
+## 👥 Contributors
 
-# 📜 License
+Thanks goes to these wonderful people in the team:
 
-MIT © [Zeyad Zahran](https://github.com/Zeyadzahran) & [aelaraby6](https://github.com/aelaraby6)
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/aelaraby6">
+        <img src="https://avatars.githubusercontent.com/u/154278999?v=4" width="100px;" alt=""/>
+        <br /><sub><b>Abdelrahman Elaraby</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Zeyadzahran">
+        <img src="https://avatars.githubusercontent.com/u/155586428?v=4" width="100px;" alt=""/>
+        <br /><sub><b>Zeyad Zahran</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
