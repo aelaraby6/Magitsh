@@ -14,10 +14,22 @@
   "keywords": [
     "git",
     "vcs",
-    "version-control"
+    "version-control",
+    "magitsh",
+    "cli",
+    "learning",
+    "educational"
   ],
-  "author": "",
+  "author": "aelaraby6",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aelaraby6/Magitsh.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aelaraby6/Magitsh/issues"
+  },
+  "homepage": "https://github.com/aelaraby6/Magitsh#readme",
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^11.1.0"
@@ -28,5 +40,11 @@
   "engines": {
     "node": ">=14.0.0"
   },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
   "type": "commonjs"
 }
