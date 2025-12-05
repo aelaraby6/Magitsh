@@ -1,17 +1,15 @@
-# 🔮 Magitsh — A Minimal Git Implementation for Learning Version Control
+# Magitsh — A Minimal Git Implementation for Learning Version Control
 
 Magitsh is a lightweight, Git-like version control system built entirely with Node.js, created as an educational project to understand how Git works internally — object storage, commits, branches, diffs, merges, and more.
 
-This project is built by:
+This project is built by: [Zeyad Zahran](https://github.com/Zeyadzahran) & [aelaraby6](https://github.com/aelaraby6)
 
-- Zeyad Zahran — https://github.com/Zeyadzahran
-- aelaraby6 — https://github.com/aelaraby6
 
 We built this to demystify Git internals and give learners a minimal, functional VCS they can read, modify, and explore.
 
 ---
 
-## 📦 Installation
+## Installation
 
 ```
 npm install -g magitsh
@@ -19,7 +17,7 @@ npm install -g magitsh
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Initialize a repository
 
@@ -55,7 +53,7 @@ magitsh log
 
 ---
 
-## 🌿 Branching
+## Branching
 
 ```
 magitsh branch               # List branches
@@ -65,7 +63,7 @@ magitsh checkout -b <name>   # Create + switch
 
 ---
 
-## 🔀 Merge Branches
+## Merge Branches
 
 ```
 magitsh merge <branch>
@@ -78,7 +76,7 @@ Supports:
 
 ---
 
-## 🧩 Diff Viewer
+## Diff Viewer
 
 ```
 magitsh diff
@@ -89,7 +87,7 @@ magitsh diff <commit1> <commit2>
 
 ---
 
-# ⚙️ Features
+# Features
 
 - Repository initialization (`.magitsh`)
 - Staging area with SHA-1 hashing
