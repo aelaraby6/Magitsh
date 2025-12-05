@@ -1,6 +1,6 @@
 {
   "name": "magitsh",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple Git-like version control system built with Node.js",
   "main": "src/index.js",
   "bin": {
